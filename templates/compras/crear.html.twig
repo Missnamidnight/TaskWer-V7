@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Añadir nuevo artículo{% endblock %}
+
+{% block body %}
+    <h1>Añadir artículo para la compra</h1>
+    
+    {% include 'comunes/_mensajes.html.twig' %}
+
+    {% include 'compras/_formulario.html.twig' with {'accion': path('app_crear_articulo')} %}
+
+{% endblock %}

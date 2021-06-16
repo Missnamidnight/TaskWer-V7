@@ -1,0 +1,67 @@
+<nav style="background-color:#FEADFF;" class="navbar navbar-expand-lg navbar-light ">
+	<a class="navbar-brand" href="{{path('index')}}"><img src="/img/diario.png" height="70px">TaskWer</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto ">
+			{% if app.user %}
+
+				<li class="nav-item active">
+					<a class="nav-link" href="{{path('app_crear_tarea')}}">
+						Crear tarea
+						<img src="/img/add.png" height="20px">
+
+					</a>
+				</li>
+			
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_realizado') }}">
+						Tareas realizadas
+						<img src="/img/check-tick.png" height="20px">
+					</a>
+				</li>
+			
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_listacompra') }}">
+						Mi lista de la compra 
+						<img src="/img/check-tick.png" height="20px">
+					</a>
+				</li>
+			
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('time_app_relax') }}">
+						Escucha mientras trabajas
+						
+					</a>
+				</li>
+			{% endif %}
+			{% if is_granted('ROLE_ADMIN') %}
+
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('user_index') }}">
+						Usuarios
+					</a>
+				</li>
+			{% endif %}
+		
+			
+
+
+		</ul>
+		<ul class="navbar-nav  ">
+			{% if app.user %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_logout') }}">
+						Cerrar sesión
+						{{ app.user.email }}<img src="/img/profile.png" height="40px">
+
+					</a>
+				</li>
+			{% endif %}
+		</ul>
+
+	</div>
+
+</nav>

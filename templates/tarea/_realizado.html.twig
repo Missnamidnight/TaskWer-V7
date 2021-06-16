@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tareas finalizadas
+{% endblock %}
+
+{% block body %}
+<h1>Tareas finalizadas</h1>
+{% include 'comunes/_mensajes.html.twig' %}
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Descripción</th>
+			<th scope="col">Fecha de creación</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		{% for index, tarea in tareasfinalizadas %}
+			{% if tarea.finalizada %}
+
+				<tr>
+					<td class="descripcion">
+						{{ tarea.descripcion }}
+
+					</td>
+					<td>
+						{{ tarea.creadoEn|tiempo}}
+					</td>
+					<td><a  href="#"  role="button" class="btn  btn-danger mg-3 finalizar" data-url="{{ path('finalizar_tarea', {'id': tarea.id}) }}" data-texto-contrario=" {{ tarea.finalizada ? 'Quitar de la lista'   }}">
+							{{ tarea.finalizada ? 'Quitar de la lista' }}
+						</a></td>
+				</tr>
+			</a>
+		</td>
+	</tbody>
+</tr>{% endif %}{% else %}<tr>
+<th colspan="3" scope="row">No se han encontrado resultados</th></tr>{% endfor %}</tbody></table>{% endblock %}

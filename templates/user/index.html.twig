@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de usuarios
+{% endblock %}
+
+{% block body %}
+	<h1>Lista de usuarios</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Email</th>
+				<th>Roles</th>
+				<th>Último acceso a la aplicación</th>
+				<th>Acciones sobre usuario</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+					<td>{{ app.user.ultimoAcces|date("d/m/Y") }}</td>
+					<td>
+						<a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-info" role="button">+Info</a>
+						<a href="{{ path('app_eliminar_usuario', {'id': user.id}) }}" class="btn btn-danger" role="button"onclick="return confirm('Si desea eliminar al usuario pulse aceptar ');">Eliminar</a>
+
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">No se han encontrado datos</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a style="color:#F9EDEB;" href="{{ path('app_register') }}">Añadir nuevo usuario</a>
+{% endblock %}

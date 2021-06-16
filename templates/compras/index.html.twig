@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de la compra{% endblock %}
+
+{% block body %}
+    <h1>Lista de la compra</h1>
+    {% include 'comunes/_mensajes.html.twig' %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descripción del artículo</th>
+            <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, compra in compras %}
+                <tr>
+                    <th scope="row">{{ index + 1 }}</th>
+                    <td>{{ compra.descripcion }}</td>
+                    <td>
+                       <a href="{{ path('app_editar_articulo', {'id': compra.id}) }}" class="btn btn-info" role="button">Editar Artículo</a>
+						<a href="{{ path('app_eliminar_articulo', {'id': compra.id}) }}" class="btn btn-danger" role="button"onclick="return confirm('Si desea eliminar el artículo porque ya está comprado pulse aceptar ');">Ya comprado</a>
+                        
+                    </td>
+                </tr>
+            {% else %}    
+                <tr>
+                    <th colspan="3" scope="row">No se han encontrado resultados</th>
+                </tr>
+            {% endfor %}
+        </tbody>
+       
+    </table>
+     <div class="mt-3">
+		{{
+      include(
+        'comunes/_paginacion.html.twig',
+        {
+          elementos_por_pagina: constant(
+            'App\\Controller\\ComprasController::ELEMENTOS_POR_PAGINA'
+          ),
+          numero_total_elementos: compras.count,
+          pagina_actual: pagina
+        }
+      )
+    }}
+	</div>
+        <a href="{{ path('app_crear_articulo') }}">Añadir nuevo artículo</a>
+
+{% endblock %}

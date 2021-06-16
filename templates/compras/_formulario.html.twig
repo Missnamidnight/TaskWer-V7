@@ -1,0 +1,9 @@
+<form method="POST" action="{{ accion }}">
+    <div class="form-group">
+        <label for="descripcion">Descripción del artículo</label>
+        <input type="text" class="form-control" id="descripcion" name="descripcion" aria-describedby="descripcion" placeholder="Descripción" value="{{ compras.descripcion }}">
+        <small id="descripcionAyuda" class="form-text text-muted">Descripción del artículo.</small>
+    </div>
+    
+    <button type="submit" class="btn btn-info" role="button">{{ etiqueta_btn_enviar|default('Guardar') }}</button>
+</form>
